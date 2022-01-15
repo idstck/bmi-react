@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BmiForm from './BmiForm'
 
 const Bmi = () => {
-    const onChangeInput = () => {}
+
+    const [count, setCount] = useState({
+        heightCount: '0',
+        weightCount: '0'
+    })
+
+    const { heightCount, weightCount } = count
+
+    const onChangeInput = (e) => {
+        const { name, value } = e.target
+        setCount(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+    }
 
     return (
         <>
@@ -17,14 +31,14 @@ const Bmi = () => {
                                 title={`Height (cm)`}
                                 type='number'
                                 name='heightCount'
-                                value=""
+                                value={heightCount}
                                 onChange={onChangeInput}
                                 />
                             <BmiForm 
                                 title={`Weight (kg)`}
                                 type='number'
                                 name='weightCount'
-                                value=""
+                                value={weightCount}
                                 onChange={onChangeInput}
                                 />
                             <button className="btn btn-sm btn-primary">Reset</button>
